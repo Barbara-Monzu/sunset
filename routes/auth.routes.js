@@ -3,31 +3,31 @@ const bcrypt = require('bcrypt')
 const User = require("../models/User.model")
 
 // Signup
-router.get('/registro', (req, res) => res.render('auth/signup'))
-router.post('/registro', (req, res) => {
+router.get('/signup', (req, res) => res.render('auth/signup'))
+router.post('/signup', (req, res) => {
 
-  const { username, userPwd } = req.body
+  const { email, password } = req.body
 
-  if (userPwd.length === 0 || username.length === 0) {      
-    res.render('auth/signup-form', { errorMsg: 'Rellena todos los campos' })
+  if (password.length === 0 || email.length === 0) {
+    res.render('auth/signup', { errorMsg: 'Rellena todos los campos' })
     return
   }
 
   User
-    .findOne({ username })
+    .findOne({ email })
     .then(user => {
 
-      if (user) {                  
+      if (user) {
         res.render('auth/signup', { errorMsg: 'Usuario ya registrado' })
         return
       }
 
       const bcryptSalt = 10
       const salt = bcrypt.genSaltSync(bcryptSalt)
-      const hashPass = bcrypt.hashSync(userPwd, salt)    
+      const hashPass = bcrypt.hashSync(password, salt)
 
       User
-        .create({ username, password: hashPass })         
+        .create({ email, password: hashPass })
         .then(() => res.redirect('/'))
         .catch(err => console.log(err))
     })
@@ -37,18 +37,18 @@ router.post('/registro', (req, res) => {
 
 
 // Login
-router.get('/iniciar-sesion', (req, res) => res.render('auth/login'))
-router.post('/iniciar-sesion', (req, res) => {
+router.get('/login', (req, res) => res.render('auth/login'))
+router.post('/login', (req, res) => {
 
-  const { username, userPwd } = req.body
+  const { email, password } = req.body
 
-  if (userPwd.length === 0 || username.length === 0) {     
+  if (password.length === 0 || email.length === 0) {
     res.render('auth/login', { errorMsg: 'Rellena los campos' })
     return
   }
 
   User
-    .findOne({ username })
+    .findOne({ email })
     .then(user => {
 
       if (!user) {
@@ -56,13 +56,13 @@ router.post('/iniciar-sesion', (req, res) => {
         return
       }
 
-      if (bcrypt.compareSync(userPwd, user.password) === false) {
+      if (bcrypt.compareSync(password, user.password) === false) {
         res.render('auth/login', { errorMsg: 'Contraseña incorrecta' })
         return
       }
 
       req.session.currentUser = user
-      res.redirect('/students')
+      res.redirect('/')
     })
     .catch(err => console.log(err))
 
@@ -70,7 +70,7 @@ router.post('/iniciar-sesion', (req, res) => {
 
 
 // Logout
-router.get('/cerrar-sesion', (req, res) => {
+router.get('/logout', (req, res) => {
   req.session.destroy(() => res.redirect('/'))
 })
 

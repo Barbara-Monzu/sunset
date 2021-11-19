@@ -11,7 +11,7 @@ const userSchema = new Schema(
     password: String,
     profileImg: {
       String,
-      default: "/images/sun-default.svg",
+      // default: "/images/sun-default.svg",
     },
     email: {
       type: String, 

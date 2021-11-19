@@ -22,9 +22,14 @@ const sunSchema = new Schema(
 				type: String,
 			},
 			coordinates: {
-				type: [Number],
-				maxlength: 2,
-				required: true,
+				lat: {
+					type: Number,
+					required: true
+				},
+				lng: {
+					type: Number,
+					required: true
+				}
 			}
 		},
 
@@ -46,13 +51,19 @@ const sunSchema = new Schema(
 		},
 
 		creator: {
-			type: Schema.Types.ObjectId, 
+			type: Schema.Types.ObjectId,
 			ref: "User"
 		},
 
 		sunTime: {
-			type: Date,
-			required: true,
+			start: {
+				type: Date,
+				required: true,
+			},
+			end: {
+				type: Date,
+				required: true,
+			}
 		}
 
 	}
