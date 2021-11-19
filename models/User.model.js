@@ -24,9 +24,11 @@ const userSchema = new Schema(
     role:  { 
       type: String, 
       default: "USER",
-      enum: ['USER', 'EDITOR', 'ADMIN'] 
+      enum: ['USER', 'ADMIN'] 
     },
-    created: {
+	favorites: [{
+		type: Schema.Types.ObjectId, ref: "Sun"}],
+    createdTime: {
       type: Date,
       default: Date.now
     }

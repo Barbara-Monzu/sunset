@@ -24,6 +24,18 @@ const sunSchema = new Schema(
 			coordinates: {
 				type: [Number],
 				maxlength: 2,
+				required: true,
+			}
+		},
+
+		address: {
+			street: {
+				type: String,
+				trim: true,
+			},
+			city: {
+				type: String,
+				trim: true,
 			}
 		},
 
@@ -38,7 +50,7 @@ const sunSchema = new Schema(
 			ref: "User"
 		},
 
-		time: {
+		sunTime: {
 			type: Date,
 			required: true,
 		}
