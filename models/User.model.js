@@ -28,10 +28,6 @@ const userSchema = new Schema(
     },
 	favorites: [{
 		type: Schema.Types.ObjectId, ref: "Sun"}],
-    createdTime: {
-      type: Date,
-      default: Date.now
-    }
   },
   { timestamps: true }
 );
