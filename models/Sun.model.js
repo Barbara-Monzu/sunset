@@ -22,20 +22,19 @@ const sunSchema = new Schema(
 				type: String,
 			},
 			coordinates: {
-				lat: {
-					type: Number,
-					required: true
-				},
-				lng: {
-					type: Number,
-					required: true
-				}
+				type: [Number],
+				maxlength: 2,
+				index: "2dsphere",
 			}
 		},
 
 		address: {
 			street: {
 				type: String,
+				trim: true,
+			},
+			number:{
+				type: Number,
 				trim: true,
 			},
 			city: {
