@@ -6,7 +6,7 @@ const User = require("../models/User.model")
 router.get('/signup', (req, res) => res.render('auth/signup'))
 router.post('/signup', (req, res) => {
 
-  const { email, password } = req.body
+  const { email, username, password } = req.body
 
   if (password.length === 0 || email.length === 0) {
     res.render('auth/signup', { errorMsg: 'Rellena todos los campos' })
@@ -27,7 +27,7 @@ router.post('/signup', (req, res) => {
       const hashPass = bcrypt.hashSync(password, salt)
 
       User
-        .create({ email, password: hashPass })
+        .create({ email, username, password: hashPass })
         .then(() => res.redirect('/'))
         .catch(err => console.log(err))
     })

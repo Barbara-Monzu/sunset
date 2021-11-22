@@ -20,7 +20,7 @@ require("./config")(app);
 
 // Session config
 
-// require('./config/session.config')(app)
+require('./config/session.config')(app)
 
 // default value for title local
 const projectName = "Mauro";

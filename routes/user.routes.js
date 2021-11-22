@@ -5,7 +5,7 @@
 // const Sun = require("../models/Sun.model")
 
 
-// //router.get("/students", (req, res, next) => res.render('auth/login', { errorMsg: 'Tienes que registrarte para entrar a ver todos los estudiantes' }));
+// router.get("/students", (req, res, next) => res.render('auth/login', { errorMsg: 'Tienes que registrarte para entrar a ver todos los estudiantes' }));
 
 // router.get("/profile", isLoggedIn, (req, res, next) => {
 //   // checkRoles("PM", "STUDENT") aquí solo me dejaría entrar si es PM o STUDENT
@@ -68,4 +68,4 @@
 // })
 
 
-module.exports = router;
+// module.exports = router;
