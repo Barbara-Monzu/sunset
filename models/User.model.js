@@ -5,20 +5,24 @@ const userSchema = new Schema(
   {
     username: { 
       type: String, 
-      //unique: true,
+	  trim: true,
     
     },
-    password: String,
+    password: {
+	  type: String,
+	  required: true,
+	},
     profileImg: {
       String,
-      // default: "/images/sun-default.svg",
+
     },
     email: {
       type: String, 
       lowercase: true,
       required: [true, "can't be blank"], 
       match: [/\S+@\S+\.\S+/, 'is invalid'], 
-      index: true
+      index: true,
+	  unique: true
     },
     bio: String,
     role:  { 

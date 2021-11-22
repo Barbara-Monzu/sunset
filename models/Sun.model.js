@@ -20,6 +20,7 @@ const sunSchema = new Schema(
 		location: {
 			type: {
 				type: String,
+				default: "Point",
 			},
 			coordinates: {
 				type: [Number],
@@ -54,9 +55,9 @@ const sunSchema = new Schema(
 			ref: "User"
 		},
 
-		pictures: [{ type: Schema.Types.ObjectId, ref: "Picture" }],
+		pictures: [String],
 
-		sunTime: {
+/* 		sunTime: {
 			start: {
 				type: Date,
 				required: true,
@@ -65,7 +66,7 @@ const sunSchema = new Schema(
 				type: Date,
 				required: true,
 			}
-		}
+		} */
 
 	}
 )
