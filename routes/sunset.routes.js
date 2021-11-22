@@ -3,6 +3,9 @@ const User = require("../models/User.model")
 const Sun = require("../models/Sun.model")
 const Picture = require("../models/Picture.model")
 const fileUploader = require("../config/cloudinary.config");
+const APIHandler = require("../Clases/APIHandler");
+
+const geoCoder = new APIHandler();
 
 router.get('/', (req, res, next) => {
 	Sun.find({category: "sunset"})
@@ -17,15 +20,16 @@ router.get('/', (req, res, next) => {
 router.get("/new", (req, res) => res.render("sun/new-sun"));
 
 router.post("/new", fileUploader.single("sun-image"), (req, res) => {
-	console.log(req.file)
-	const { name, comment, location, adress, category } = req.body;
-	// const { name, comment, location, adress, category } = req.body;
+	const {name, comment, category} = req.body;
+	/* const {pictures} = req.file.path */
 	
-  Picture.create({ title: name, imageUrl: req.file.path })
-    .then(() => {	
-      res.redirect("/sunsets/list"); 
-    })
-    .catch((error) => console.log(`Error while creating a new picture: ${error}`));
+	const {street, number, city} = req.body;
+	const address = `${street}+${number}+${city}`;
+
+	geoCoder.getLocation(address)
+		.then(location => { console.log(location.data) })
+		.catch(err => { console.log(err) })
+	
 });
 
 router.get("/list", (req, res) => {
