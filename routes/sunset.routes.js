@@ -12,5 +12,10 @@ router.get('/', (req, res, next) => {
 		});
 })
 
+router.get('/new', (req, res, next) => {
+	res.render('/sun/new-sun')
+})
+
+
 
 module.exports = router

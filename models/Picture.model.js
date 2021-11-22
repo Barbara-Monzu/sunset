@@ -5,13 +5,7 @@ const pictureSchema = new Schema(
 		title: {
 			type: String,
 			trim: true,
-			requirred: true
-		},
-
-		description: {
-			type: String,
-			trim: true,
-			requirred: true
+			required: true
 		},
 
 		imageUrl: {
