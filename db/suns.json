@@ -17,6 +17,9 @@
 			"city": ""
 		},
 		"category": "sunset",
+
+		"picture": [{}],
+
 		"sunTime": {
 			"start": "",
 			"end": ""

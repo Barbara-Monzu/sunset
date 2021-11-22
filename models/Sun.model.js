@@ -55,6 +55,8 @@ const sunSchema = new Schema(
 			ref: "User"
 		},
 
+		picture: [{ type: Schema.Types.ObjectId, ref: "Picture" }],
+
 		sunTime: {
 			start: {
 				type: Date,
