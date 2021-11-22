@@ -8,12 +8,6 @@ const pictureSchema = new Schema(
 			requirred: true
 		},
 
-		description: {
-			type: String,
-			trim: true,
-			requirred: true
-		},
-
 		imageUrl: {
 			type: String,
 			required: true,
@@ -22,7 +16,6 @@ const pictureSchema = new Schema(
 
 		public_id: {
 			type: String,
-			required: true,
 			trim: true
 		}
 	}
