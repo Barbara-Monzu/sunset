@@ -22,12 +22,20 @@ router.post("/new", fileUploader.single("sun-image"), (req, res) => {
 	// const { name, comment, location, adress, category } = req.body;
 	
   Picture.create({ title: name, imageUrl: req.file.path })
-    .then((newPicture) => {
-		
-      res.redirect("/"); 
+    .then(() => {	
+      res.redirect("/sunsets/list"); 
     })
     .catch((error) => console.log(`Error while creating a new picture: ${error}`));
 });
 
+router.get("/list", (req, res) => {
+	Picture.find()
+	.then(sunsets => {
+		res.render('sun/every-sun', {sunsets})
+	})
+	.catch(err => {
+		console.log(err)
+	});
+})
 
 module.exports = router
