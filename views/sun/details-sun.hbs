@@ -7,18 +7,24 @@
     <a href="/sunsets/list/{{_id}}" class="btn btn-primary">Go </a>
   </div>
 </div>
-
+<p id="category">{{category}}</p>
 <p> {{address.street}} {{address.number}} {{address.city}}  </p>
+
+<p id="sunrise"></p>
+<p id="sunset"></p>
+<p id="cloudcover"></p>
 
 <form>
   <input type="hidden" id="latitude" name="lat" value="{{location.coordinates.[0]}}">
   <input type="hidden" id="longitude" name="lng" value="{{location.coordinates.[1]}}">
 </form>
 
+
 <div id="map"></div>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkzgyhP_CswYl13k5mNkOJu2Nldp3Y-Ys"></script>
 <script src="/js/detalles.js"></script>
+<script src="/js/time-weather.js"></script>
 
 
  
