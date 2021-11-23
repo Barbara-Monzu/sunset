@@ -1,44 +1,52 @@
 <h2>New Sunrise/Sunset</h2>
 <div class="row">
-  <div class="col-md-6">
+	<div class="col-md-6">
 
 
-    {{!-- 2. Instrucciones: además de lo habitual incluir el enctype --}}
-    <form action="/sunsets/new" method="POST" enctype="multipart/form-data">
+		{{!-- 2. Instrucciones: además de lo habitual incluir el enctype --}}
+		<form action="/sunsets/new" method="POST" enctype="multipart/form-data">
 
+			<div class="form-group">
+				<label>Name:
+					<input type="text" name="name" class="form-control" />
+				</label>
+			</div>
 
-				<div class="row">
-					<div class="input-field col s6">
-						<input placeholder="Name" id="name" type="text" name="name">
-						<label for="name">Name</label>
-					</div>
-					<div class="input-field col s6">
-						<input id="comment" type="text" name="comment">
-						<label for="comment">Comment</label>
-					</div>
-				</div> 
-				<div class="row">
-					<div class="input-field col s4">
-						<input placeholder="Name" id="name" type="text" name="street">
-						<label for="name">Street</label>
-					</div>
-					<div class="input-field col s4">
-						<input id="comment" type="text" name="number">
-						<label for="comment">Number</label>
-					</div>
-					<div class="input-field col s4">
-						<input id="comment" type="text" name="city">
-						<label for="comment">City</label>
-					</div>
-				</div>
-				<div class="file-field input-field">
-					<div class="btn">
-						<span>File</span>
-						<input type="file" >
-					</div>
-					<div class="file-path-wrapper">
-						<input class="file-path validate" type="text" name="sun-image">
-					</div>
-				</div>
-      <button type="submit" class="btn btn-primary">Create</button>
-    </form>
+			<div class="form-group">
+				<label>Description:
+					<textarea name="comment" cols="30" rows="4" class="form-control"> </textarea>
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label>Location:
+					<textarea name="location" cols="30" rows="4" class="form-control"> </textarea>
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label>Street:
+					<textarea name="street" cols="30" rows="4" class="form-control"> </textarea>
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label>Number:
+					<textarea name="number" cols="30" rows="4" class="form-control"> </textarea>
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label>City:
+					<textarea name="city" cols="30" rows="4" class="form-control"> </textarea>
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label>Image:
+					<input type="file" name="sun-image" class="form-control-file" />
+				</label>
+			</div>
+
+			<button type="submit" class="btn btn-primary">Create</button>
+		</form>

@@ -10,3 +10,8 @@ a {
 h1 {
   color: 15px;
 }
+
+#map{
+	width: 50%;
+	height: 300px;
+}

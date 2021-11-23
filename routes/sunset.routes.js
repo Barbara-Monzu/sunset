@@ -7,7 +7,18 @@ const APIHandler = require("../Clases/APIHandler");
 
 const geoCoder = new APIHandler();
 
-router.get('/', (req, res, next) => {
+
+router.get('/list/:id', (req, res) => {
+	Sun.findById(req.params.id)
+		.then(sun => {
+			res.render('sun/details-sun', sun)
+		})
+		.catch(err => {
+			console.log(err)
+		});
+})
+
+router.get('/', (req, res,) => {
 	Sun.find({category: "sunset"})
 		.then(sunsets => {
 			res.render('/sun/every-sun', {sunsets})
@@ -17,11 +28,14 @@ router.get('/', (req, res, next) => {
 		});
 })
 
+
+
 router.get("/new", (req, res) => res.render("sun/new-sun"));
 
 router.post("/new", fileUploader.single("sun-image"), (req, res) => {
 	const {name, comment} = req.body;
-	const pictures = req.file.path
+	let pictures;
+	req.file ? pictures = req.file.path : pictures = null;
 	const category = "sunset";
 	const {street, number, city} = req.body;
 	const address = `${street}+${number}+${city}`;
@@ -39,9 +53,9 @@ router.post("/new", fileUploader.single("sun-image"), (req, res) => {
 });
 
 router.get("/list", (req, res) => {
-	Picture.find()
-	.then(sunsets => {
-		res.render('sun/every-sun', {sunsets})
+	Sun.find({category: "sunset"})
+	.then(sun => {
+		res.render('sun/every-sun', {sun})
 	})
 	.catch(err => {
 		console.log(err)
