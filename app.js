@@ -22,7 +22,7 @@ require("./config/fileupload.config");
 
 // Session config
 
-require('./config/session.config')
+require('./config/session.config')(app);
 
 
 // default value for title local

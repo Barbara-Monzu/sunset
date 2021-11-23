@@ -26,11 +26,6 @@ function initMap() {
         center: centerLocation
     });
 
-/*     let center = {
-        lat: undefined,
-        lng: undefined
-    }; */
-
     createMarker(map, centerLocation)
 
 }

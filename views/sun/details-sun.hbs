@@ -1,6 +1,6 @@
 
 <div class="card" style="width: 18rem;">
-  <img src="{{pictures}}" class="card-img-top" alt="...">
+  <img src="{{pictures.[0]}}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{name}}</h5>
     <p class="card-text">{{description}}</p>
@@ -19,7 +19,6 @@
   <input type="hidden" id="latitude" name="lat" value="{{location.coordinates.[0]}}">
   <input type="hidden" id="longitude" name="lng" value="{{location.coordinates.[1]}}">
 </form>
-
 
 <div id="map"></div>
 
