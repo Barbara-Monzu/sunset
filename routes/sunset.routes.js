@@ -20,14 +20,20 @@ router.get('/', (req, res, next) => {
 router.get("/new", (req, res) => res.render("sun/new-sun"));
 
 router.post("/new", fileUploader.single("sun-image"), (req, res) => {
-	const {name, comment, category} = req.body;
-	/* const {pictures} = req.file.path */
-	
+	const {name, comment} = req.body;
+	const pictures = req.file.path
+	const category = "sunset";
 	const {street, number, city} = req.body;
 	const address = `${street}+${number}+${city}`;
 
 	geoCoder.getLocation(address)
-		.then(location => { console.log(location.data) })
+		.then(location => {
+			const {lat, lng} = location.data.results[0].geometry.location;
+			Sun.create({name, comment, category, location: {coordinates: [lat, lng]}, address: {street, number, city}, pictures})
+				.then(sun => {
+					console.log(sun)
+				})
+		})
 		.catch(err => { console.log(err) })
 	
 });
