@@ -1,0 +1,54 @@
+<h2>Edit</h2>
+
+<div class="row">
+	<div class="col-md-6">
+
+
+		{{!-- 2. Instrucciones: además de lo habitual incluir el enctype --}}
+		<form action="/sunsets/list/{{_id}}/edit" method="POST" enctype="multipart/form-data">
+
+			<div class="form-group">
+				<label>Name:
+					<input type="text" name="name" class="form-control" value="{{name}}"/>
+				</label>
+			</div>
+
+				<div class="form-group">
+				<label>Category:
+					<input name="category" cols="30" rows="4" class="form-control" value="{{category}}"> </input>
+				</label>
+			</div>
+        
+
+			<div class="form-group">
+				<label>Description:
+					<textarea name="comment" cols="30" rows="4" class="form-control" value="{{comment}}"> </textarea>
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label>Street:
+					<input name="street" cols="30" rows="4" class="form-control" value="{{address.street}}"> </input>
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label>Number:
+					<input name="number" cols="30" rows="4" class="form-control" value="{{address.number}}"> </input>
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label>City:
+					<input name="city" cols="30" rows="4" class="form-control" value="{{address.city}}"> </input>
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label>Image:
+					<input type="file" name="sun-image" class="form-control-file"/>
+				</label>
+			</div>
+
+			<button type="submit" class="btn btn-primary">Edit</button>
+		</form>
