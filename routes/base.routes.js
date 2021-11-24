@@ -2,7 +2,8 @@ const router = require("express").Router();
 
 /* GET home page */
 router.get("/", (req, res, next) => {
-	const userId = req.session.currentUser._id
+	let userId;
+	req.session.currentUser ? userId = req.session.currentUser._id : userId = null;
 	res.render("index", {userId});
 });
 

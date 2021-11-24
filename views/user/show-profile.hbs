@@ -1,0 +1,22 @@
+<h2>{{username}}</h2>
+{{#if profileImg}}
+<img src="{{profileImg}}" alt="{{username}}"/>
+{{/if}}
+<div class="row">
+	<div class="col-md-6">
+
+
+		{{!-- 2. Instrucciones: además de lo habitual incluir el enctype --}}
+		
+	<p>Name:{{username}}</p>
+	
+	<p>Bio:{{bio}}</p>
+
+		{{#if favorites}}
+		<ul> Your favorites</ul>
+		{{#each favorites}}
+		<li>{{this}}</li>
+		{{/each}}
+		{{else}}
+		<p>{{username}} no  have favorites</p>
+		{{/if}}
