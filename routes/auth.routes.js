@@ -28,7 +28,7 @@ router.post('/signup', (req, res) => {
 
       User
         .create({ email, username, password: hashPass })
-        .then(() => res.redirect('/'))
+        .then((newUser) => res.redirect(`/users/${newUser._id}/edit-profile`))
         .catch(err => console.log(err))
     })
     .catch(err => console.log(err))

@@ -4,7 +4,7 @@ module.exports = app => {
 
     app.use("/", require("./base.routes"));
     app.use("/", require("./auth.routes")); 
-    // app.use("/", require("./user.routes"));
+    app.use("/users", require("./user.routes"));
 	//app.use("/suns", isLoggedIn, require("./sun.routes"));
 	app.use("/suns", require("./sun.routes"));
   }

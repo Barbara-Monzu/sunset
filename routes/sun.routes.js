@@ -2,7 +2,7 @@ const router = require("express").Router()
 const User = require("../models/User.model")
 const Sun = require("../models/Sun.model")
 const fileUploader = require("../config/cloudinary.config");
-const APIHandler = require("../Clases/APIHandler");
+const APIHandler = require("../Classes/APIHandler");
 
 const geoCoder = new APIHandler();
 
@@ -34,17 +34,30 @@ router.get("/:category/new", (req, res) => {
 });
 
 router.post("/:category/new", fileUploader.array("sun-image", 3), (req, res) => {
-	const { name, comment, street, number, city } = req.body;
+	const { name, comment, street, number, city, latitude, longitude, checkNavigator} = req.body;
 	let pictures;
 	const files = req.files.map(elm => {
 		 return elm.path
 	})
 	
-	console.log("ESTOY VIENDO LAS FOTOS:", req.files.forEach)
+	
 	req.file ? pictures = req.file.path : pictures = null;
 	const category = req.params.category;
 	const address = `${street}+${number}+${city}`;
+	
 
+	if(checkNavigator === "true"){
+		console.log("en sin adddres")
+		Sun.create({ name, comment, category, location: { coordinates: [latitude, longitude] }, pictures: files })
+				.then(sun => {
+					console.log(sun)
+					res.redirect(`/suns/${category}/list`)
+				})
+				.catch(err => { console.log(err) })
+
+	}
+	else {
+		console.log("en geocoder")
 	geoCoder.getLocation(address)
 		.then(location => {
 			const { lat, lng } = location.data.results[0].geometry.location;
@@ -56,6 +69,7 @@ router.post("/:category/new", fileUploader.array("sun-image", 3), (req, res) => 
 		})
 		.catch(err => { console.log(err) })
 
+	}
 });
 
 

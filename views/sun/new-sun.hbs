@@ -36,11 +36,23 @@
 				</label>
 			</div>
 
+			<div>
+				<button type="button" id="getCurrentLocation"> Get current location</button>
+			</div>
+
 			<div class="form-group">
 				<label>Image:
 					<input type="file" name="sun-image" class="form-control-file" multiple="multiple"/>
 				</label>
 			</div>
 
+			<div>
+				<input type="hidden" id="latitude" name="latitude" value="">
+				<input type="hidden" id="longitude" name="longitude" value="">
+				<input type="hidden" id="check-navigator" name="checkNavigator" value="false">
+			</div>
+
 			<button type="submit" class="btn btn-primary">Create</button>
 		</form>
+
+		<script src="/js/current-location.js"></script>
