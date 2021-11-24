@@ -19,10 +19,13 @@ router.post('/:id/edit-profile', fileUploader.single("profile-image"), (req, res
 
 	User.findByIdAndUpdate(req.params.id, {username, bio, profileImg}, {new: true})
 		.then(userEdit => {
-		res.render("user/user-index", userEdit)
+		res.redirect('/suns/list/all')
 	})
 		.catch(err => { console.log(err) })
 })
+
+
+
 
 
 

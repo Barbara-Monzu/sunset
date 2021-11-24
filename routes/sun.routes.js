@@ -7,6 +7,7 @@ const APIHandler = require("../Classes/APIHandler");
 const geoCoder = new APIHandler();
 
 
+
 router.get("/:category/list", (req, res) => {
 	Sun.find({ category: req.params.category })
 		.then(suns => {
@@ -17,8 +18,23 @@ router.get("/:category/list", (req, res) => {
 		});
 })
 
+router.get('/list/all', (req, res) => {
+	Sun.find({category: "sunset"})
+		.then(sunsets => { 
+			Sun.find({ category: "sunrise" })
+				.then(sunrises => {
+					res.render('sun/all-suns', { sunsets, sunrises })
+				})
+		})
+		.catch(err => {
+			console.log(err)
+		});
+})
+
+
 router.get('/:category/list/:id', (req, res) => {
 	Sun.findById(req.params.id)
+		.populate('creator')
 		.then(sun => {
 			res.render('sun/details-sun', sun)
 		})
@@ -35,6 +51,7 @@ router.get("/:category/new", (req, res) => {
 
 router.post("/:category/new", fileUploader.array("sun-image", 3), (req, res) => {
 	const { name, comment, street, number, city, latitude, longitude, checkNavigator} = req.body;
+	const creator = req.session.currentUser._id
 	let pictures;
 	const files = req.files.map(elm => {
 		 return elm.path
@@ -48,7 +65,7 @@ router.post("/:category/new", fileUploader.array("sun-image", 3), (req, res) => 
 
 	if(checkNavigator === "true"){
 		console.log("en sin adddres")
-		Sun.create({ name, comment, category, location: { coordinates: [latitude, longitude] }, pictures: files })
+		Sun.create({ name, comment, category, creator, location: { coordinates: [latitude, longitude] }, pictures: files})
 				.then(sun => {
 					console.log(sun)
 					res.redirect(`/suns/${category}/list`)
@@ -58,16 +75,16 @@ router.post("/:category/new", fileUploader.array("sun-image", 3), (req, res) => 
 	}
 	else {
 		console.log("en geocoder")
-	geoCoder.getLocation(address)
-		.then(location => {
-			const { lat, lng } = location.data.results[0].geometry.location;
-			Sun.create({ name, comment, category, location: { coordinates: [lat, lng] }, address: { street, number, city }, pictures: files })
-				.then(sun => {
-					console.log(sun)
-					res.redirect(`/suns/${category}/list`)
-				})
-		})
-		.catch(err => { console.log(err) })
+		geoCoder.getLocation(address)
+			.then(location => {
+				const { lat, lng } = location.data.results[0].geometry.location;
+				Sun.create({ name, comment, category, creator, location: { coordinates: [lat, lng] }, address: { street, number, city }, pictures: files})
+					.then(sun => {
+						console.log(sun)
+						res.redirect(`/suns/${category}/list`)
+					})
+			})
+			.catch(err => { console.log(err) })
 
 	}
 });

@@ -1,0 +1,38 @@
+Welcome {{username}}
+Sunsets and Sunrises
+
+
+
+<div class="container"> 
+    <div class="row">
+{{#each sunsets}}
+   
+        <div class="col6"></div>
+            <div class="card" style="width: 18rem;">
+            <img src="{{pictures}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{name}}</h5>
+                <p class="card-text">{{description}}</p>
+                <a href="/suns/{{category}}/list/{{_id}}" class="btn btn-primary">Go </a>
+            </div>
+        </div>
+
+{{/each}}
+
+<div> a partir de aqui sunrise</div>
+{{#each sunrises}}
+  
+        <div class="col6"></div>
+            <div class="card" style="width: 18rem;">
+            <img src="{{pictures}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{name}}</h5>
+                <p class="card-text">{{description}}</p>
+                <a href="/suns/{{category}}/list/{{_id}}" class="btn btn-primary">Go </a>
+            </div>
+            </div>
+
+{{/each}}
+
+    </div>
+</div>
