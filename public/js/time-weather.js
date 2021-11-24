@@ -5,7 +5,7 @@ const cloudcover = document.getElementById("cloudcover")
 
 const coordinates = `?latitude=${latitude}&longitude=${longitude}`
 const weather ='&hourly=cloudcover&daily=sunrise,sunset&timezone=Europe%2FBerlin'
-const axiosApp = axios.create({ baseURL: "https://api.open-meteo.com/v1/forecast" + coordinates + weather })
+
 
 function formatTime(time){
 	let splitted = time.split("T")
@@ -33,6 +33,9 @@ function weatherMessage(currentCloud){
 }
 
 function getSunTime() {
+	
+	const axiosApp = axios.create({ baseURL: "https://api.open-meteo.com/v1/forecast" + coordinates + weather })
+
 	axiosApp.get()
 		.then(response => {
 			let sunset = formatTime(response.data.daily.sunset[0])

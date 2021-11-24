@@ -8,3 +8,4 @@ module.exports = app => {
 	//app.use("/suns", isLoggedIn, require("./sun.routes"));
 	app.use("/suns", require("./sun.routes"));
   }
+  

@@ -3,6 +3,7 @@ const User = require("../models/User.model")
 const Sun = require("../models/Sun.model")
 const fileUploader = require("../config/cloudinary.config");
 const APIHandler = require("../Classes/APIHandler");
+const { checkFavorites } = require("../utils/index");
 
 const geoCoder = new APIHandler();
 
@@ -41,6 +42,42 @@ router.get('/:category/list/:id', (req, res) => {
 		.catch(err => {
 			console.log(err)
 		});
+})
+
+router.post('/:category/list/:id/add-favorite', (req, res) => {
+	const user = req.session.currentUser;
+	const newFavorite = req.params.id;
+	console.log("newFav:", typeof(newFavorite));
+	console.log("user favorites:", user.favorites);
+	let isFavorite = user.favorites.includes(newFavorite);
+	console.log("newfavorite", newFavorite);
+	console.log("isFavorite:", isFavorite);
+	if (!(isFavorite)) {
+		User.findByIdAndUpdate(user._id, { $push: { favorites: newFavorite } }, { new: true })
+			.then(user => {
+				req.session.currentUser = user;
+			})
+			.catch(err => {
+				console.log(err)
+			})
+	}
+	else{
+		console.log("Already in favorites")
+	}
+	
+
+})
+
+router.post('/:category/list/:id/delete-favorite', (req, res) => {
+	const user = req.session.currentUser;
+	const newFavorite = req.params.id;
+	User.findByIdAndUpdate(user._id, { $pull: { favorites: newFavorite }}, {new: true})
+		.then(user => {
+			console.log(user)
+		})
+		.catch(err => {
+			console.log(err)
+		})
 })
 
 
@@ -129,4 +166,13 @@ router.get('/:category/list/:id/delete', (req, res) => {
 		.catch(err => { console.log(err) });
 })
 
+// router.get('/:category/list/:id/delete-favorite', (req, res) => {
+// 	Sun.findByIdAndDelete(req.params.id)
+// 		.then(() => res.redirect(`/suns/${req.params.category}/list`))
+// 		.catch(err => { console.log(err) });
+// })
+
+
+
 module.exports = router
+
