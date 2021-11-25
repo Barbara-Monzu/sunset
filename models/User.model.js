@@ -5,15 +5,15 @@ const userSchema = new Schema(
   {
     username: { 
       type: String, 
-	  trim: true,
+	    trim: true,
     
     },
     password: {
-	  type: String,
-	  required: true,
+	    type: String,
+	    required: true,
 	},
     profileImg: {
-      String,
+      type: String,
 
     },
     email: {
@@ -22,9 +22,11 @@ const userSchema = new Schema(
       required: [true, "can't be blank"], 
       match: [/\S+@\S+\.\S+/, 'is invalid'], 
       index: true,
-	  unique: true
+	    unique: true
     },
+
     bio: String,
+    
     role:  { 
       type: String, 
       default: "USER",

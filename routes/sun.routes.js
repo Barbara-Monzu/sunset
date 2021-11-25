@@ -3,7 +3,7 @@ const User = require("../models/User.model")
 const Sun = require("../models/Sun.model")
 const fileUploader = require("../config/cloudinary.config");
 const APIHandler = require("../Classes/APIHandler");
-const { checkFavorites } = require("../utils/index");
+const { checkFavorites, isOwner } = require("../utils/index");
 
 const geoCoder = new APIHandler();
 
@@ -37,7 +37,9 @@ router.get('/:category/list/:id', (req, res) => {
 	Sun.findById(req.params.id)
 		.populate('creator')
 		.then(sun => {
-			res.render('sun/details-sun', sun)
+			console.log(sun)
+			const owner = isOwner(sun.creator._id, req.session.currentUser._id)
+			res.render('sun/details-sun', {sun, owner})
 		})
 		.catch(err => {
 			console.log(err)
@@ -45,17 +47,15 @@ router.get('/:category/list/:id', (req, res) => {
 })
 
 router.post('/:category/list/:id/add-favorite', (req, res) => {
+
 	const user = req.session.currentUser;
 	const newFavorite = req.params.id;
-	console.log("newFav:", typeof (newFavorite));
-	console.log("user favorites:", user.favorites);
 	let isFavorite = user.favorites.includes(newFavorite);
-	console.log("newfavorite", newFavorite);
-	console.log("isFavorite:", isFavorite);
+	
 	if (!(isFavorite)) {
 		User.findByIdAndUpdate(user._id, { $push: { favorites: newFavorite } }, { new: true })
 			.then(user => {
-				req.session.currentUser = user;
+				
 				res.redirect(`/suns/${req.params.category}/list/${newFavorite}`)
 			})
 			.catch(err => {
@@ -95,7 +95,7 @@ router.post("/:category/new", fileUploader.array("sun-image", 3), (req, res) => 
 		return elm.path
 	})
 
-
+	
 	req.file ? pictures = req.file.path : pictures = null;
 	const category = req.params.category;
 	const address = `${street}+${number}+${city}`;
@@ -130,9 +130,16 @@ router.post("/:category/new", fileUploader.array("sun-image", 3), (req, res) => 
 
 
 router.get('/:category/list/:id/edit', (req, res) => {
-	Sun.findById(req.params.id)
+
+	const {id, category} = req.params
+
+	Sun.findById(id)
 		.then(sun => {
-			res.render('sun/edit-sun', sun)
+			const owner = isOwner(sun.creator._id, req.session.currentUser._id)
+			if (owner) {
+				res.render('sun/edit-sun', sun)
+			}
+			res.redirect(`/suns/${category}/list/${id}`)
 		})
 		.catch(err => {
 			console.log(err)
@@ -162,16 +169,13 @@ router.post('/:category/list/:id/edit', fileUploader.array("sun-image", 3), (req
 })
 
 router.get('/:category/list/:id/delete', (req, res) => {
-	Sun.findByIdAndDelete(req.params.id)
-		.then(() => res.redirect(`/suns/${req.params.category}/list`))
+	const { id, category } = req.params
+	//revisar
+	Sun.findByIdAndDelete(id)
+		.then((sun) => {res.redirect(`/suns/${category}/list`)
+	})
 		.catch(err => { console.log(err) });
 })
-
-// router.get('/:category/list/:id/delete-favorite', (req, res) => {
-// 	Sun.findByIdAndDelete(req.params.id)
-// 		.then(() => res.redirect(`/suns/${req.params.category}/list`))
-// 		.catch(err => { console.log(err) });
-// })
 
 
 

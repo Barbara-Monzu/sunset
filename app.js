@@ -18,7 +18,6 @@ const app = express();
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 require("./config/cloudinary.config");
-require("./config/fileupload.config");
 
 // Session config
 

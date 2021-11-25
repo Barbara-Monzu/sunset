@@ -19,4 +19,5 @@ module.exports = {
   //optional chaining, el "?" detiene la ejecución si isOwner es falsy
   isOwner: (profileId, userId) => profileId.equals(userId),
   checkFavorites: (user, addFavorite) => user.favorites.includes(addFavorite),
+
 }

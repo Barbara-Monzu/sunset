@@ -1,10 +1,11 @@
 
 
 const category = document.getElementById("category").innerHTML
+const temperature = document.getElementById("temperature")
 const cloudcover = document.getElementById("cloudcover")
 
 const coordinates = `?latitude=${latitude}&longitude=${longitude}`
-const weather ='&hourly=cloudcover&daily=sunrise,sunset&timezone=Europe%2FBerlin'
+const weather ='&hourly=cloudcover,temperature_2m&daily=sunrise,sunset&timezone=Europe%2FBerlin'
 
 
 function formatTime(time){
@@ -12,12 +13,12 @@ function formatTime(time){
 	return splitted[1]
 }
 
-function getCloudCover(hour){
+function getHourIndex(hour){
 	let fullTime = hour.substring(0, 2) + hour.substring(3, 5)
 	 return Math.round(Number(fullTime) / 100)
 }
 
-function weatherMessage(currentCloud){
+function cloudCoverMessage(currentCloud){
 	if (currentCloud <= 25){
 		return `It's a perfect day to go see this beautiful ${category}`
 	}
@@ -30,6 +31,11 @@ function weatherMessage(currentCloud){
 	else if (currentCloud > 75 && currentCloud <= 125){
 		return `It's very cloudy, today is not a good day for watching this ${category}`
 	}
+}
+
+function temperatureMessage(currentTemp){
+	return `Temperature at ${category} time: ${currentTemp}°C`
+
 }
 
 function getSunTime() {
@@ -45,11 +51,14 @@ function getSunTime() {
 			
 			
 			let cloudCoverIndex
-			category === "sunrise" ? cloudCoverIndex = getCloudCover(sunrise)
-				: cloudCoverIndex = getCloudCover(sunset)
+			category === "sunrise" ? cloudCoverIndex = getHourIndex(sunrise)
+				: cloudCoverIndex = getHourIndex(sunset)
 
 			let currentCloud = response.data.hourly.cloudcover[cloudCoverIndex]
-			cloudcover.innerHTML = weatherMessage(currentCloud);
+			let currentTemp = response.data.hourly.temperature_2m[cloudCoverIndex]
+			cloudcover.innerHTML = cloudCoverMessage(currentCloud);
+			temperature.innerHTML = temperatureMessage(currentTemp);
+
 
 		})
 }

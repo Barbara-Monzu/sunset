@@ -15,12 +15,19 @@
 		<div class="card" style="width: 18rem;">
 			<img src="{{this.pictures.[0]}}" class="card-img-top" alt="...">
 			<div class="card-body">
-				{{!-- <a href="/suns/{{this.category}}/list/{{this._id}}/delete" class="btn btn-primary">Delete</a> --}}
+				<div class="heart-wrapper">
+					<button type="button" id="removeFavorite" class="favorite-button">
+						<input type="hidden" id="remove-fav" value="{{_id}}">
+						<input type="hidden" id="category-for-fav" value="{{this.category}}">
+						<i class="fas fa-heart favorite__icon favorite--enable"></i>
+						<i class="far fa-heart favorite__icon favorite--not"></i>
+					</button>
+				</div>
 
-				<button id="removeFavorite"> Remove Fav.
-					<input type="button" id="remove-fav" value="{{_id}}" hidden>
+			{{!-- 	<button id="removeFavorite"> Remove Fav.
+					<input type="hidden" id="remove-fav" value="{{_id}}" >
 					<input type="hidden" id="category-for-fav" value="{{this.category}}">
-				</button>
+				</button> --}}
 
 			</div>
 		</div>
