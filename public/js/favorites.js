@@ -29,7 +29,6 @@ function checkFavorites() {
 
 	axiosApp.get()
 		.then(response => {
-			response.data.includes(sunId) ? advice.textContent = 'Ya lo has añadido a favoritos' : null
 			response.data.includes(sunId) ? favoriteButton.classList.add("is-favorite")  : console.log("no esta en favoritos")
 		})
 

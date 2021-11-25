@@ -55,8 +55,7 @@ router.post('/:category/list/:id/add-favorite', (req, res) => {
 	if (!(isFavorite)) {
 		User.findByIdAndUpdate(user._id, { $push: { favorites: newFavorite } }, { new: true })
 			.then(user => {
-				
-				res.redirect(`/suns/${req.params.category}/list/${newFavorite}`)
+
 			})
 			.catch(err => {
 				console.log(err)
@@ -170,13 +169,27 @@ router.post('/:category/list/:id/edit', fileUploader.array("sun-image", 3), (req
 
 router.get('/:category/list/:id/delete', (req, res) => {
 	const { id, category } = req.params
-	//revisar
-	Sun.findByIdAndDelete(id)
-		.then((sun) => {res.redirect(`/suns/${category}/list`)
-	})
+	Sun.findById(id)
+		.then(sun => {
+			const owner = isOwner(sun.creator._id, req.session.currentUser._id)
+			if (owner) {
+				sun.remove()
+					.then(() => {
+						res.redirect(`/suns/${category}/list/${id}`)
+					})
+			}
+		})
 		.catch(err => { console.log(err) });
 })
 
+router.post('/', (req, res) => {
+
+	const { city } = req.body;
+
+	Sun.find( { city } )
+		.then(sun => res.render('sun/all-suns', { sun }))
+		.catch(err => { console.log(err) });
+})
 
 
 module.exports = router

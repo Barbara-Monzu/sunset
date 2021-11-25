@@ -1,18 +1,46 @@
+
+<div class="container">
+	
+	<div class="row">
+
+			<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+				<div class="carousel-inner">
+					{{#each sun.pictures}}
+						<div class="carousel-item active">
+							<img src="{{this}}" class="d-block w-100" alt="sunset-sunrise img">
+						</div>
+					{{/each}}
+				</div>
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+			</div>
+
+	</div>
+
+</div>
 <div class="card" style="width: 18rem;">
-  <img src="{{sun.pictures.[0]}}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">{{sun.name}}</h5>
-    <p class="card-text">{{sun.description}}</p>
+	<img src="{{sun.pictures.[0]}}" class="card-img-top" alt="...">
+	<div class="card-body">
+		<h5 class="card-title">{{sun.name}}</h5>
+		<p class="card-text">{{sun.description}}</p>
 
-   {{#if owner}}
+		{{#if owner}}
 
-        <a href="/suns/{{sun.category}}/list/{{sun._id}}/edit" class="btn btn-primary">Edit</a>
-        <a href="/suns/{{sun.category}}/list/{{sun._id}}/delete" class="btn btn-primary">Delete</a>
+		<a href="/suns/{{sun.category}}/list/{{sun._id}}/edit" class="btn btn-primary">Edit</a>
+		<a href="/suns/{{sun.category}}/list/{{sun._id}}/delete" class="btn btn-primary">Delete</a>
 
-  {{/if}}
+		{{/if}}
 
-   
-  </div>
+
+	</div>
 </div>
 <p id="category">{{sun.category}}</p>
 <p> {{sun.address.street}} {{sun.address.number}} {{sun.address.city}} </p>
@@ -24,8 +52,8 @@
 <p>Created by: <a href="/users/{{sun.creator._id}}/profile">{{sun.creator.username}}</a></p>
 
 <form>
-  <input type="hidden" id="latitude" name="lat" value="{{sun.location.coordinates.[0]}}">
-  <input type="hidden" id="longitude" name="lng" value="{{sun.location.coordinates.[1]}}">
+	<input type="hidden" id="latitude" name="lat" value="{{sun.location.coordinates.[0]}}">
+	<input type="hidden" id="longitude" name="lng" value="{{sun.location.coordinates.[1]}}">
 
 </form>
 
@@ -42,10 +70,8 @@
 <div id="map"></div>
 
 <form>
-  <input type="hidden" id="sun-id" value="{{sun._id}}">
+	<input type="hidden" id="sun-id" value="{{sun._id}}">
 </form>
-
-
 <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkzgyhP_CswYl13k5mNkOJu2Nldp3Y-Ys"></script>
 <script src="/js/maps-markers.js"></script>
