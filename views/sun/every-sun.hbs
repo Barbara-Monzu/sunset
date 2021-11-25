@@ -1,14 +1,29 @@
-List of {{suns.[0].category}}s
+<div class="details-sun">
 
-{{#each suns}}
+  <h2 class="list">The {{suns.[0].category}}s</h2>
 
-<div class="card" style="width: 18rem;">
-  <img src="{{pictures}}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">{{name}}</h5>
-    <p class="card-text">{{description}}</p>
-    <a href="/suns/{{category}}/list/{{_id}}" class="btn btn-primary">Go </a>
+
+  <div class="row">
+
+
+    {{#each suns}}
+
+    <div class="col-sm-6 col-md-4 show-card">
+
+      <div style="width: 18rem;">
+        <img src="{{pictures}}" class="card-img-top" alt="...">
+
+        <div class="card-body">
+          <a href="/suns/{{category}}/list/{{_id}}">
+            <h5 class="card-title button">{{name}}</h5>
+          </a>
+          {{!-- <p class="card-text">{{description}}</p> --}}
+        </div>
+      </div>
+    </div>
+
+    {{/each}}
+
   </div>
-</div>
 
-{{/each}}
+</div>

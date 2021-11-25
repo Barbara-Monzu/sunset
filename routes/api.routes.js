@@ -8,4 +8,9 @@ router.get("/get-favorites", (req, res) => {
         .catch(err => console.log(err))
 })
 
+router.get("/user-id", (req, res) => {
+    const { _id } = req.session.currentUser
+    return res.json(_id)
+})
+
 module.exports = router

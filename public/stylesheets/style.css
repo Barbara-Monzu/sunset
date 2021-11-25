@@ -4,18 +4,33 @@ body {
 }
 
 a {
-  color: #00b7ff;
+  color: #ffa500;
 }
 
-h1 {
+button:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+h1{ 
   color: 15px;
 }
+
+/* p {
+  text-align: center;
+  font-size: 15px;
+} */
 
 #map{
 	width: 50%;
 	height: 300px;
+  margin-left: 20px;
 }
 
+.hidden{
+  display: none;
+}
 
 /* Heart */
 
@@ -51,4 +66,62 @@ h1 {
 .favorite-button:not(.is-favorite) .favorite--not {
   opacity: 1;
   transform: scale(1);
+}
+
+.image-index {
+  height: 100%;
+  width: 100%;
+}
+
+
+.title{
+  
+  position: absolute;
+  color: white;
+  font-size: 70px;
+  font-weight: bold;
+  top: 50%;
+  left: 35%;
+  
+
+}
+
+.first-btn {
+  /* position: absolute;
+  left: 55%;
+  top: 45%; */
+  border-radius: 45%;
+  border:1px solid ;
+  padding: 15px 50px;
+  text-align: center;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  color: orange;
+}
+
+.index {
+  position: relative;
+  /* background-image: url("../images/sunset-pajaros.jpeg"); */
+}
+
+.showcard {
+  margin-top: 20%;
+
+}
+
+.list {
+  font-size: large;
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.details-sun {
+  display: flex;
+}
+
+.img-detail {
+  height: 300px;
+  width: auto;
+
 }
