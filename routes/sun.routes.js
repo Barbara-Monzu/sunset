@@ -137,14 +137,14 @@ router.post("/:category/new", fileUploader.array("sun-image", 3), (req, res) => 
 router.get('/:category/list/:id/edit', (req, res) => {
 
 	const {id, category} = req.params
-	
+	const currentUser = req.session.currentUser ? req.session.currentUser._id : null;
 
 	Sun.findById(id)
 		.then(sun => {
 			const owner = isOwner(sun.creator._id, req.session.currentUser._id)
 			if (owner) {
 				console.log("is owner")
-				res.render('sun/edit-sun', sun)
+				res.render('sun/edit-sun', {sun, currentUser})
 			}
 			else{
 				res.redirect(`/suns/${category}/list/${id}`)
@@ -161,6 +161,9 @@ router.post('/:category/list/:id/edit', fileUploader.array("sun-image", 3), (req
 	const { name, comment, street, number, city, category } = req.body;
 	let pictures;
 	req.files ? pictures = req.files.path : pictures = null;
+	const files = req.files.map(elm => {
+		return elm.path
+	})
 	const address = `${street}+${number}+${city}`
 
 	console.log("estoy entrando en el post")
@@ -168,7 +171,7 @@ router.post('/:category/list/:id/edit', fileUploader.array("sun-image", 3), (req
 	geoCoder.getLocation(address)
 		.then(location => {
 			const { lat, lng } = location.data.results[0].geometry.location;
-			Sun.findByIdAndUpdate(id, { name, comment, category, location: { coordinates: [lat, lng] }, address: { street, number, city }, pictures }, { new: true })
+			Sun.findByIdAndUpdate(id, { name, comment, category, location: { coordinates: [lat, lng] }, address: { street, number, city }, pictures: files }, { new: true })
 				.then(sun => {
 					console.log(sun)
 					res.redirect(`/suns/${category}/list/${id}`)
