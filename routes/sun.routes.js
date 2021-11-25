@@ -10,9 +10,12 @@ const geoCoder = new APIHandler();
 
 
 router.get("/:category/list", (req, res) => {
+
+	const currentUser = req.session.currentUser ? req.session.currentUser._id : null;
+
 	Sun.find({ category: req.params.category })
 		.then(suns => {
-			res.render('sun/every-sun', { suns })
+			res.render('sun/every-sun', { suns, currentUser })
 		})
 		.catch(err => {
 			console.log(err)
@@ -20,11 +23,13 @@ router.get("/:category/list", (req, res) => {
 })
 
 router.get('/list/all', (req, res) => {
+
+	const currentUser = req.session.currentUser ? req.session.currentUser._id : null;
 	Sun.find({ category: "sunset" })
 		.then(sunsets => {
 			Sun.find({ category: "sunrise" })
 				.then(sunrises => {
-					res.render('sun/all-suns', { sunsets, sunrises })
+					res.render('sun/all-suns', { sunsets, sunrises, currentUser})
 				})
 		})
 		.catch(err => {
@@ -34,12 +39,12 @@ router.get('/list/all', (req, res) => {
 
 
 router.get('/:category/list/:id', (req, res) => {
+	const currentUser = req.session.currentUser ? req.session.currentUser._id : null;
 	Sun.findById(req.params.id)
 		.populate('creator')
 		.then(sun => {
-			console.log(sun)
 			const owner = isOwner(sun.creator._id, req.session.currentUser._id)
-			res.render('sun/details-sun', {sun, owner})
+			res.render('sun/details-sun', {sun, owner, currentUser})
 		})
 		.catch(err => {
 			console.log(err)
@@ -83,7 +88,8 @@ router.post('/:category/list/:id/delete-favorite', (req, res) => {
 
 router.get("/:category/new", (req, res) => {
 	const category = req.params.category;
-	res.render("sun/new-sun", { category })
+	const currentUser = req.session.currentUser ? req.session.currentUser._id : null;
+	res.render("sun/new-sun", { category, currentUser })
 });
 
 router.post("/:category/new", fileUploader.array("sun-image", 3), (req, res) => {
@@ -131,14 +137,19 @@ router.post("/:category/new", fileUploader.array("sun-image", 3), (req, res) => 
 router.get('/:category/list/:id/edit', (req, res) => {
 
 	const {id, category} = req.params
+	
 
 	Sun.findById(id)
 		.then(sun => {
 			const owner = isOwner(sun.creator._id, req.session.currentUser._id)
 			if (owner) {
+				console.log("is owner")
 				res.render('sun/edit-sun', sun)
 			}
-			res.redirect(`/suns/${category}/list/${id}`)
+			else{
+				res.redirect(`/suns/${category}/list/${id}`)
+			}
+			
 		})
 		.catch(err => {
 			console.log(err)

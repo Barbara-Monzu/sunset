@@ -1,25 +1,25 @@
-<h2>Welcome {{username}}</h2>
-{{#if profileImg}}
+<h2>Welcome {{user.username}}</h2>
+
 <div class="card" style="width: 18rem;">
-	<img src="{{profileImg}}" class="card-img-top" alt="...">
+	<img src="{{user.profileImg}}" class="card-img-top" alt="...">
 </div>
-{{/if}}
+
 <div class="row">
 	<div class="col-md-6">
 
 
 		{{!-- 2. Instrucciones: además de lo habitual incluir el enctype --}}
-		<form action="/users/{{_id}}/edit-profile" method="POST" enctype="multipart/form-data">
+		<form action="/users/{{user._id}}/edit-profile" method="POST" enctype="multipart/form-data">
 
 			<div class="form-group">
 				<label>Name:
-					<input type="text" name="username" class="form-control" value="{{username}}"/>
+					<input type="text" name="username" class="form-control" value="{{user.username}}"/>
 				</label>
 			</div>
 
 			<div class="form-group">
 				<label>Bio:
-					<textarea name="bio" cols="30" rows="4" class="form-control">{{bio}}</textarea>
+					<textarea name="bio" cols="30" rows="4" class="form-control">{{user.bio}}</textarea>
 				</label>
 			</div>
 

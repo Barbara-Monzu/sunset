@@ -5,7 +5,7 @@
 
 
 		{{!-- 2. Instrucciones: además de lo habitual incluir el enctype --}}
-		<form action="/suns/{{category}}/list/{{_id}}/edit" method="POST" enctype="multipart/form-data">
+		<form action="/suns/{{sun.category}}/list/{{sun._id}}/edit" method="POST" enctype="multipart/form-data">
 
 			<div class="form-group">
 				<label>Name:
@@ -52,3 +52,6 @@
 
 			<button type="submit" class="btn btn-primary">Edit</button>
 		</form>
+	
+	</div>
+</div>

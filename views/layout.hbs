@@ -16,7 +16,8 @@
 </head>
 
 <body>
-   <nav class="navbar navbar-expand-lg " id="main-nav">
+	{{#if currentUser}}
+   <nav class="navbar navbar-expand-lg ">
       <div class="container-fluid">
          <a class="navbar-brand" href="#">
             <img src="/images/sun-default.svg" alt="" width="30" height="24">Suns
@@ -36,16 +37,14 @@
                <a href="/suns/sunrise/new" class="nav-link"> Create sunrise!</a>
             </li>
             <li class="nav-item">
-               <a href="/users/{{user._id}}/edit-profile" class="nav-link"> Edit</a>
+               <a href="/users/{{currentUser}}/edit-profile" class="nav-link"> Edit</a>
             </li>
             <li class="nav-item">
-               <a href="/users/{{user._id}}/profile" class="nav-link"> Your profile!</a>
+               <a href="/users/{{currentUser}}/profile" class="nav-link"> Your profile!</a>
             </li>
-
             <li class="nav-item">
                <a class="nav-link" href="/logout">Log Out</a>
             </li>
-
 
             <form class="d-flex">
                <input class="form-control me-2" type="search" aria-label="Search">
@@ -53,6 +52,7 @@
             </form>
          </ul>
    </nav>
+	{{/if}}	
    {{{body}}}
 
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.3.0/swiper-bundle.min.js"

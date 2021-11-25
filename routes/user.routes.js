@@ -5,9 +5,12 @@ const fileUploader = require("../config/cloudinary.config");
 const {isOwner} = require("../utils/index");
 
 router.get('/:id/edit-profile', (req, res) => {
+
+	const currentUser = req.session.currentUser ? req.session.currentUser._id : null;
+
 	User.findById(req.params.id)
 		.then(user => {
-			res.render('user/edit-profile', user)
+			res.render('user/edit-profile', {user, currentUser})
 		})
 		.catch(err => {
 			console.log(err)
@@ -26,13 +29,16 @@ router.post('/:id/edit-profile', fileUploader.single("profile-image"), (req, res
 })
 
 router.get('/:id/profile', (req, res) => {
+
+	const currentUser = req.session.currentUser ? req.session.currentUser._id : null;
+
 	User.findById(req.params.id)
 		.populate('favorites')
 		.then(user => {
 			const userId = user._id
 			const profileId = req.session.currentUser._id
 			const owner = isOwner(userId, profileId)
-			res.render('user/show-profile', {user, owner: owner})
+			res.render('user/show-profile', { user, owner: owner, currentUser})
 		})
 		.catch(err => {
 			console.log(err)
