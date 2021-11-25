@@ -2,8 +2,12 @@ const latitude = document.getElementById("latitude")
 const longitude = document.getElementById("longitude")
 const locationBtn = document.getElementById("getCurrentLocation")
 const checkNavigator = document.getElementById("check-navigator")
+const addressGroup = document.getElementById("address-group")
 
 function getNavigatorPosition() {
+	console.log("en navigator")
+	addressGroup.remove()
+
 	if (navigator.geolocation) {
 
 		navigator.geolocation.getCurrentPosition(

@@ -12,6 +12,9 @@ button:hover {
   cursor: pointer;
 }
 
+*{
+	  box-sizing: border-box;
+}
 
 h1{ 
   color: 15px;

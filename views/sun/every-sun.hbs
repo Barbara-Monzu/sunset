@@ -1,29 +1,118 @@
-<div class="details-sun">
-
-  <h2 class="list">The {{suns.[0].category}}s</h2>
 
 
-  <div class="row">
+<style>
+		.every-sun-body{
+			color: #272727;
+			font-family: 'Quicksand', serif;
+			font-style: normal;
+			font-weight: 400;
+			letter-spacing: 0;
+			padding: 1rem;
+		}
 
+		.main{
+			max-width: 1200px;
+			margin: 0 auto;
+		}
 
-    {{#each suns}}
+		h1 {
+			font-size: 24px;
+			font-weight: 400;
+			text-align: center;
+		}
 
-    <div class="col-sm-6 col-md-4 show-card">
+		img {
+			height: auto;
+			max-width: 100%;
+			vertical-align: middle;
+		}
 
-      <div style="width: 18rem;">
-        <img src="{{pictures}}" class="card-img-top" alt="...">
+		.btn {
+			color: #ffffff;
+			padding: 0.8rem;
+			font-size: 14px;
+			text-transform: uppercase;
+			border-radius: 4px;
+			font-weight: 400;
+			display: block;
+			width: 100%;
+			cursor: pointer;
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			background: transparent;
+		}
 
-        <div class="card-body">
-          <a href="/suns/{{category}}/list/{{_id}}">
-            <h5 class="card-title button">{{name}}</h5>
-          </a>
-          {{!-- <p class="card-text">{{description}}</p> --}}
-        </div>
-      </div>
-    </div>
+		.btn:hover {
+		background-color: rgba(255, 255, 255, 0.12);
+		}
 
-    {{/each}}
+		.every-sun-cards {
+			display: flex;
+			flex-wrap: wrap;
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
 
-  </div>
+		.cards_item {
+			display: flex;
+			padding: 1rem;
+		}
 
+		.every-sun-card-item {
+  background-color: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.card_content {
+  padding: 1rem;
+  background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%);
+}
+
+.card_title {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  margin: 0px;
+}
+
+.card_text {
+  color: #ffffff;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;    
+  font-weight: 400;
+}
+
+</style>
+
+<div class="every-sun-body">
+
+	<div class="main">
+
+		<h2>Every {{suns.[0].category}}</h2>
+		<ul class="every-sun-cards">
+			
+			{{#each suns}}
+				<li class="cards_item">
+					<div class="every-sun-card-item">
+						<div class="card_image"><img src="{{pictures}}"></div>
+						<div class="card_content">
+							<h2 class="card_title">{{name}}</h2>
+							<p class="card_text">{{comment}}</p>
+							<a href="/suns/{{category}}/list/{{_id}}">
+								<button class="btn card_btn">Read More</button>
+							</a>
+						</div>
+					</div>
+				</li>
+			{{/each}}
+		</ul>
+
+	</div>
 </div>
