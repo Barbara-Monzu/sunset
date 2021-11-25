@@ -1,15 +1,14 @@
-
 <div class="card" style="width: 18rem;">
   <img src="{{pictures.[0]}}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{name}}</h5>
     <p class="card-text">{{description}}</p>
     <a href="/suns/{{category}}/list/{{_id}}/edit" class="btn btn-primary">Edit</a>
-     <a href="/suns/{{category}}/list/{{_id}}/delete" class="btn btn-primary">Delete</a>
+    <a href="/suns/{{category}}/list/{{_id}}/delete" class="btn btn-primary">Delete</a>
   </div>
 </div>
 <p id="category">{{category}}</p>
-<p> {{address.street}} {{address.number}} {{address.city}}  </p>
+<p> {{address.street}} {{address.number}} {{address.city}} </p>
 
 <p id="sunrise"></p>
 <p id="sunset"></p>
@@ -19,10 +18,10 @@
 <form>
   <input type="hidden" id="latitude" name="lat" value="{{location.coordinates.[0]}}">
   <input type="hidden" id="longitude" name="lng" value="{{location.coordinates.[1]}}">
- 
+
 </form>
 
-
+<p id="advice"></p>
 <button type="button" class="btn btn-dark" id="add-favorite-btn">Favorite</button>
 <button type="button" class="btn btn-danger" id="delete-favorite-btn"> Remove Favorite</button>
 
@@ -30,15 +29,10 @@
 <div id="map"></div>
 
 <form>
-	<input type="hidden" id="sun-id" value="{{_id}}">
+  <input type="hidden" id="sun-id" value="{{_id}}">
 </form>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkzgyhP_CswYl13k5mNkOJu2Nldp3Y-Ys"></script>
 <script src="/js/maps-markers.js"></script>
 <script src="/js/time-weather.js"></script>
 <script src="/js/favorites.js"></script>
-
-
-
-
- 

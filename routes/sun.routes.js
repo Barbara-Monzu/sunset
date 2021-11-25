@@ -20,8 +20,8 @@ router.get("/:category/list", (req, res) => {
 })
 
 router.get('/list/all', (req, res) => {
-	Sun.find({category: "sunset"})
-		.then(sunsets => { 
+	Sun.find({ category: "sunset" })
+		.then(sunsets => {
 			Sun.find({ category: "sunrise" })
 				.then(sunrises => {
 					res.render('sun/all-suns', { sunsets, sunrises })
@@ -47,7 +47,7 @@ router.get('/:category/list/:id', (req, res) => {
 router.post('/:category/list/:id/add-favorite', (req, res) => {
 	const user = req.session.currentUser;
 	const newFavorite = req.params.id;
-	console.log("newFav:", typeof(newFavorite));
+	console.log("newFav:", typeof (newFavorite));
 	console.log("user favorites:", user.favorites);
 	let isFavorite = user.favorites.includes(newFavorite);
 	console.log("newfavorite", newFavorite);
@@ -56,22 +56,23 @@ router.post('/:category/list/:id/add-favorite', (req, res) => {
 		User.findByIdAndUpdate(user._id, { $push: { favorites: newFavorite } }, { new: true })
 			.then(user => {
 				req.session.currentUser = user;
+				res.redirect(`/suns/${req.params.category}/list/${newFavorite}`)
 			})
 			.catch(err => {
 				console.log(err)
 			})
 	}
-	else{
+	else {
 		console.log("Already in favorites")
 	}
-	
+
 
 })
 
 router.post('/:category/list/:id/delete-favorite', (req, res) => {
 	const user = req.session.currentUser;
 	const newFavorite = req.params.id;
-	User.findByIdAndUpdate(user._id, { $pull: { favorites: newFavorite }}, {new: true})
+	User.findByIdAndUpdate(user._id, { $pull: { favorites: newFavorite } }, { new: true })
 		.then(user => {
 			console.log(user)
 		})
@@ -83,31 +84,31 @@ router.post('/:category/list/:id/delete-favorite', (req, res) => {
 
 router.get("/:category/new", (req, res) => {
 	const category = req.params.category;
-	res.render("sun/new-sun", {category})
+	res.render("sun/new-sun", { category })
 });
 
 router.post("/:category/new", fileUploader.array("sun-image", 3), (req, res) => {
-	const { name, comment, street, number, city, latitude, longitude, checkNavigator} = req.body;
+	const { name, comment, street, number, city, latitude, longitude, checkNavigator } = req.body;
 	const creator = req.session.currentUser._id
 	let pictures;
 	const files = req.files.map(elm => {
-		 return elm.path
+		return elm.path
 	})
-	
-	
+
+
 	req.file ? pictures = req.file.path : pictures = null;
 	const category = req.params.category;
 	const address = `${street}+${number}+${city}`;
-	
 
-	if(checkNavigator === "true"){
+
+	if (checkNavigator === "true") {
 		console.log("en sin adddres")
-		Sun.create({ name, comment, category, creator, location: { coordinates: [latitude, longitude] }, pictures: files})
-				.then(sun => {
-					console.log(sun)
-					res.redirect(`/suns/${category}/list`)
-				})
-				.catch(err => { console.log(err) })
+		Sun.create({ name, comment, category, creator, location: { coordinates: [latitude, longitude] }, pictures: files })
+			.then(sun => {
+				console.log(sun)
+				res.redirect(`/suns/${category}/list`)
+			})
+			.catch(err => { console.log(err) })
 
 	}
 	else {
@@ -115,7 +116,7 @@ router.post("/:category/new", fileUploader.array("sun-image", 3), (req, res) => 
 		geoCoder.getLocation(address)
 			.then(location => {
 				const { lat, lng } = location.data.results[0].geometry.location;
-				Sun.create({ name, comment, category, creator, location: { coordinates: [lat, lng] }, address: { street, number, city }, pictures: files})
+				Sun.create({ name, comment, category, creator, location: { coordinates: [lat, lng] }, address: { street, number, city }, pictures: files })
 					.then(sun => {
 						console.log(sun)
 						res.redirect(`/suns/${category}/list`)

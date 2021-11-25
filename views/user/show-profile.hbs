@@ -6,30 +6,33 @@
 {{/if}}
 <div class="row">
 	<div class="col-md-6">
-	<p>Bio:</p>
-	<p>{{user.bio}}</p>
+		<p>Bio:</p>
+		<p>{{user.bio}}</p>
 
-{{#if user.favorites}}
-	<p> Your favorites</p>
-	{{#each user.favorites}}
+		{{#if user.favorites}}
+		<p> Your favorites</p>
+		{{#each user.favorites}}
 		<div class="card" style="width: 18rem;">
 			<img src="{{this.pictures.[0]}}" class="card-img-top" alt="...">
 			<div class="card-body">
-				<a href="/suns/{{this.category}}/list/{{this._id}}/delete" class="btn btn-primary">Delete</a>
-				<form>
-					<input type="hidden" id="remove-fav" value="{{_id}}">
-				</form>
+				{{!-- <a href="/suns/{{this.category}}/list/{{this._id}}/delete" class="btn btn-primary">Delete</a> --}}
+
+				<div id="removeFavorite"> Remove Fav.
+					<input type="button" id="remove-fav" value="{{_id}}" hidden>
+					<input type="hidden" id="category-for-fav" value="{{this.category}}">
+				</div>
+
 			</div>
 		</div>
-	{{/each}}
+		{{/each}}
 
-{{else}}
-		<p>{{username}} no  have favorites </p>
-{{/if}}
+		{{else}}
+		<p>{{username}} no have favorites </p>
+		{{/if}}
 
-{{#if owner}}
-<p>you own this profile</p>
-<a href="/users/{{user._id}}/edit-profile" class="btn btn-primary">Edit</a>
-{{/if}}
+		{{#if owner}}
+		<p>you own this profile</p>
+		<a href="/users/{{user._id}}/edit-profile" class="btn btn-primary">Edit</a>
+		{{/if}}
 
-<script src="/js/profile-favorites.js"></script>
+		<script src="/js/profile-favorites.js"></script>
