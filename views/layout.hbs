@@ -17,42 +17,28 @@
 
 <body>
 	{{#if currentUser}}
-   <nav class="navbar navbar-expand-lg ">
-      <div class="container-fluid">
-         <a class="navbar-brand" href="#">
-            <img src="/images/sun-default.svg" alt="" width="30" height="24">Suns
-         </a>
-
-         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-               <a href="/suns/sunset/list" class="nav-link"> Sunsets</a>
-            </li>
-            <li class="nav-item">
-               <a href="/suns/sunset/new" class="nav-link"> Create sunset!</a>
-            </li>
-            <li class="nav-item">
-               <a href="/suns/sunrise/list" class="nav-link"> Sunrises</a>
-            </li>
-            <li class="nav-item">
-               <a href="/suns/sunrise/new" class="nav-link"> Create sunrise!</a>
-            </li>
-            <li class="nav-item">
-               <a href="/users/{{currentUser}}/edit-profile" class="nav-link"> Edit</a>
-            </li>
-            <li class="nav-item">
-               <a href="/users/{{currentUser}}/profile" class="nav-link"> Your profile!</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link" href="/logout">Log Out</a>
-            </li>
-
-            <form class="d-flex">
-               <input class="form-control me-2" type="search" aria-label="Search">
-               <button class="btn btn-sm" type="submit">Search</button>
-            </form>
-         </ul>
-   </nav>
+		<nav>
+			<a class="logo" href="/"><img src="/images/sun-default.svg" alt="" width="30" height="24">Suns</a>
+			<ul class="nav-bar">
+				<li class="nav-bar_item"><a href="/">home</a></li>
+				<li class="nav-bar_item"><a href="/users/{{currentUser}}/profile">your profile</a></li>
+				<li class="nav-bar_item dropdown">
+					<a href="#">suns</a>
+					<ul class="project">
+						<li class="drop-item"><a href="/suns/list/all">Every sun</a></li>
+						<li class="drop-item"><a href="/suns/sunset/list">Sunsets</a></li>
+						<li class="drop-item"><a href="/suns/sunrise/list">Sunrises</a></li>
+						<li class="drop-item"><a href="/suns/sunset/new">Create Sunsets</a></li>
+						<li class="drop-item"><a href="/suns/sunset/new">Create Sunrises</a></li>
+					</ul>
+				</li>
+				<li class="nav-bar_item"><a href="/logout">Log out</a></li>
+			</ul>
+		</nav>
 	{{/if}}	
+
+
+
    {{{body}}}
 
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.3.0/swiper-bundle.min.js"
