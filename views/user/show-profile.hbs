@@ -24,12 +24,12 @@
 				<img src="{{this.pictures.[0]}}" class="card-img-top" alt="...">
 				<div class="card-body">
 					<h5 class="card-title">{{this.name}}</h5>
-				{{#if owner}}
+				
 					<button id="removeFavorite" class="press-btn"> Remove Fav.
 						<input type="hidden" id="remove-fav" value="{{_id}}">
 						<input type="hidden" id="category-for-fav" value="{{this.category}}">
 					</button>
-				{{/if}}
+				
 				</div>
 			</div>
 	{{/each}}
