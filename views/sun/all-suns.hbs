@@ -1,38 +1,66 @@
 
-<h1>Every Sun</h1>
+
+<style>
+	.all-suns-wrapper{
+		padding-top: 10px;
+		display: flex;
+	}
+
+	.all-suns-det{
+		  width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+	}
+
+	h1{
+		font-size: 2em;
+		text-align: center;	
+	}
+</style>
 
 
 
-<div class="container"> 
-    <div class="row">
-{{#each sunsets}}
-   
-        <div class="col6"></div>
-            <div class="card" style="width: 18rem;">
-            <img src="{{pictures}}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{name}}</h5>
-                <p class="card-text">{{description}}</p>
-                <a href="/suns/{{category}}/list/{{_id}}" class="btn btn-primary">Go </a>
-            </div>
-        </div>
 
-{{/each}}
 
-<div> a partir de aqui sunrise</div>
-{{#each sunrises}}
-  
-        <div class="col6"></div>
-            <div class="card" style="width: 18rem;">
-            <img src="{{pictures}}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{name}}</h5>
-                <p class="card-text">{{description}}</p>
-                <a href="/suns/{{category}}/list/{{_id}}" class="btn btn-primary">Go </a>
-            </div>
-            </div>
+<div class="all-suns-wrapper">
 
-{{/each}}
+	<div class="all-suns-det">
+		<h1>Every Sunset</h1>
+			{{#each sunsets}}
 
-    </div>
+			<div class="card">
+				<div class="card_image"> <img src="{{pictures}}" /> </div>
+				<div class="card_title title-white">
+				<a href="/suns/{{category}}/list/{{_id}}">
+					<h5 class="card-title button">{{name}}</h5>
+				</a>
+				</div>
+			</div>
+			
+			{{/each}}
+	</div>
+
+
+
+	<div class="all-suns-det">
+			<h1>Every Sunrise</h1>
+			{{#each sunrises}}
+			
+			<div class="card">
+				<div class="card_image"> <img src="{{pictures}}" /> </div>
+				<div class="card_title title-white">
+				<a href="/suns/{{category}}/list/{{_id}}">
+					<h5 class="card-title button">{{name}}</h5>
+				</a>
+				</div>
+			</div>
+
+
+			{{/each}}
+
+	</div>
+
 </div>
+

@@ -1,70 +1,70 @@
-<!--  <div class="container">
 
-	<div class="row">
+<div class="app">
 
-		<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-			<div class="carousel-inner">
-				{{#each sun.pictures}}
-				<div class="carousel-item active">
-					<img src="{{this}}" class="d-block w-100" alt="sunset-sunrise img">
+
+
+	<div class="details-sun">
+
+
+		<div class="cards-list">
+
+			<div class="card 1">
+				<div class="card_image"> <img src="{{sun.pictures.[0]}}" /></div>
+				<h5 class="card-title">{{sun.name}}</h5>
+				<p> {{sun.address.street}} {{sun.address.number}} {{sun.address.city}} </p>
+				<p>Created by: <a style="text-decoration: none;"
+						href="/users/{{sun.creator._id}}/profile">{{sun.creator.username}}</a></p>
+
+				<div class="heart-wrapper">
+					<button type="button" class="favorite-button">
+						<i class="fas fa-heart favorite__icon favorite--enable"></i>
+						<i class="far fa-heart favorite__icon favorite--not"></i>
+					</button>
+					<p id="advice"></p>
 				</div>
-				{{/each}}
+
+
+
+				<p class="card-text">{{sun.description}}</p>
 			</div>
+			{{!-- <img src="{{sun.pictures.[0]}}" class="img-detail" alt="..."> --}}
+
 		</div>
-		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-			data-bs-slide="prev">
-			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			<span class="visually-hidden">Previous</span>
-		</button>
-		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-			data-bs-slide="next">
-			<span class="carousel-control-next-icon" aria-hidden="true"></span>
-			<span class="visually-hidden">Next</span>
-		</button>
-	</div>
 
-</div>  -->
+		<div class="sun-info">
+			<div class="card-small">
 
-<div class="details-sun">
+				<p class="title-black" id="category">{{sun.category}}</p>
 
-	<div class="image">
+				<p id="temperature"></p>
 
-		<img src="{{sun.pictures.[0]}}" class="img-detail" alt="...">
+				<p id="sunrise"></p>
 
-		<h5 class="card-title">{{sun.name}}</h5>
+				<p id="sunset"></p>
 
-		<p class="card-text">{{sun.description}}</p>
+				<p id="cloudcover"></p>
 
-		{{#if owner}}
 
-		<a class="press-btn" href="/suns/{{sun.category}}/list/{{sun._id}}/edit">Edit</a>
+			</div>
+			<div>
+				{{#if owner}}
+				<a style="text-decoration: none;" class="press-btn"
+					href="/suns/{{sun.category}}/list/{{sun._id}}/edit">Edit</a>
 
-		<a class="press-btn" href="/suns/{{sun.category}}/list/{{sun._id}}/delete">Delete</a>
+				<a style="text-decoration: none;" class="press-btn"
+					href="/suns/{{sun.category}}/list/{{sun._id}}/delete">Delete</a>
+				{{/if}}
+			</div>
 
-		{{/if}}
-
-		<div class="heart-wrapper">
-			<button type="button" class="favorite-button">
-				<i class="fas fa-heart favorite__icon favorite--enable"></i>
-				<i class="far fa-heart favorite__icon favorite--not"></i>
-			</button>
 		</div>
-		<p id="advice"></p>
-
-		<p id="category">{{sun.category}}</p>
-
-		<p> {{sun.address.street}} {{sun.address.number}} {{sun.address.city}} </p>
-
-		<p id="sunrise"></p>
-		<p id="sunset"></p>
-		<p id="cloudcover"></p>
-		<p id="temperature"></p>
-		<p>Created by: <a href="/users/{{sun.creator._id}}/profile">{{sun.creator.username}}</a></p>
 
 	</div>
 
+
+
+</div>
+<div class="tamaño">
 	<div id="map"></div>
-
 </div>
 
 <form>
@@ -72,7 +72,6 @@
 	<input type="hidden" id="longitude" name="lng" value="{{sun.location.coordinates.[1]}}">
 	<input type="hidden" id="sun-id" value="{{sun._id}}">
 </form>
-
 <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkzgyhP_CswYl13k5mNkOJu2Nldp3Y-Ys"></script>
 <script src="/js/maps-markers.js"></script>

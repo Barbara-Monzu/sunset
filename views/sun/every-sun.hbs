@@ -89,6 +89,12 @@
   font-weight: 400;
 }
 
+.card_image{
+	width: inherit;
+  height: inherit;
+  object-fit: cover;
+}
+
 </style>
 
 <div class="every-sun-body">
@@ -104,9 +110,8 @@
 						<div class="card_image"><img src="{{pictures}}"></div>
 						<div class="card_content">
 							<h2 class="card_title">{{name}}</h2>
-							<p class="card_text">{{comment}}</p>
 							<a href="/suns/{{category}}/list/{{_id}}">
-								<button class="btn card_btn">Read More</button>
+								<button class="btn card_btn">Details</button>
 							</a>
 						</div>
 					</div>
