@@ -13,7 +13,6 @@ const sunSchema = new Schema(
 		comment: {
 			type: String,
 			trim: true,
-			required: true,
 			maxlength: 500,
 		},
 

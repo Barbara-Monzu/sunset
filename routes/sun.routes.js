@@ -189,7 +189,7 @@ router.get('/:category/list/:id/delete', (req, res) => {
 			if (owner) {
 				sun.remove()
 					.then(() => {
-						res.redirect(`/suns/${category}/list/${id}`)
+						res.redirect(`/suns/${category}/list/`)
 					})
 			}
 		})

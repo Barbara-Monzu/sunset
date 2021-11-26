@@ -89,35 +89,29 @@
   font-weight: 400;
 }
 
-.card_image{
-	width: inherit;
+.card_image {
+  width: inherit;
   height: inherit;
-  object-fit: cover;
+  border-radius: 40px;
 }
 
+.card_image img {
+  width: inherit;
+  height: inherit;
+  border-radius: 40px;
+  object-fit: cover;
+}
 </style>
-
-<div class="every-sun-body">
-
-	<div class="main">
-
-		<h2>Every {{suns.[0].category}}</h2>
-		<ul class="every-sun-cards">
-			
-			{{#each suns}}
-				<li class="cards_item">
-					<div class="every-sun-card-item">
-						<div class="card_image"><img src="{{pictures}}"></div>
-						<div class="card_content">
-							<h2 class="card_title">{{name}}</h2>
-							<a href="/suns/{{category}}/list/{{_id}}">
-								<button class="btn card_btn">Details</button>
-							</a>
-						</div>
-					</div>
-				</li>
-			{{/each}}
-		</ul>
-
-	</div>
+{{!-- <h2 class="list">The {{suns.[0].category}}s</h2> --}}
+<div class="cards-list">
+  {{#each suns}}
+  <div class="card">
+    <div class="card_image"> <img src="{{pictures}}" /> </div>
+    <div class="card_title title-white">
+      <a href="/suns/{{category}}/list/{{_id}}">
+        <h5 class="card-title button">{{name}}</h5>
+      </a>
+    </div>
+  </div>
+  {{/each}}
 </div>
