@@ -15,16 +15,16 @@ function getNavigatorPosition() {
 
 
 				latitude.value = position.coords.latitude,
-				longitude.value = position.coords.longitude
+					longitude.value = position.coords.longitude
 				checkNavigator.value = "true"
 			},
-			
+
 			() => {
 				console.log('Error in the geolocation service.');
 			});
 
 	} else {
-		
+
 		console.log('Browser does not support geolocation.');
 	}
 }

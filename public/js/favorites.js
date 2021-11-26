@@ -6,7 +6,7 @@ const favoriteButton = document.querySelector(".favorite-button")
 
 
 function addFavorite() {
-	const axiosApp = axios.create({ baseURL: `http://localhost:3000/suns/${category}/list/${sunId}/add-favorite` })
+	const axiosApp = axios.create({ baseURL: `https://sunsents-sunrises.herokuapp.com/suns/${category}/list/${sunId}/add-favorite` })
 
 	axiosApp.post()
 		.then(response => {
@@ -16,7 +16,7 @@ function addFavorite() {
 }
 
 function deleteFavorite() {
-	const axiosApp = axios.create({ baseURL: `http://localhost:3000/suns/${category}/list/${sunId}/delete-favorite` })
+	const axiosApp = axios.create({ baseURL: `https://sunsents-sunrises.herokuapp.com/suns/${category}/list/${sunId}/delete-favorite` })
 
 	axiosApp.post()
 		.then(response => {
@@ -25,11 +25,11 @@ function deleteFavorite() {
 }
 
 function checkFavorites() {
-	const axiosApp = axios.create({ baseURL: `http://localhost:3000/api/get-favorites` })
+	const axiosApp = axios.create({ baseURL: `https://sunsents-sunrises.herokuapp.com/api/get-favorites` })
 
 	axiosApp.get()
 		.then(response => {
-			response.data.includes(sunId) ? favoriteButton.classList.add("is-favorite")  : console.log("no esta en favoritos")
+			response.data.includes(sunId) ? favoriteButton.classList.add("is-favorite") : console.log("no esta en favoritos")
 		})
 
 	console.log("Estes es el id de checkfavorites", sunId)

@@ -12,7 +12,7 @@ const deleteFav = document.querySelectorAll('#removeFavorite').forEach(elem => e
 
 
 function deleteFavorite(sunId, category) {
-	const axiosApp = axios.create({ baseURL: `http://localhost:3000/suns/${category}/list/${sunId}/delete-favorite` })
+	const axiosApp = axios.create({ baseURL: `https://sunsents-sunrises.herokuapp.com/suns/${category}/list/${sunId}/delete-favorite` })
 
 	axiosApp.post()
 		.then(response => {
