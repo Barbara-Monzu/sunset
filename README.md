@@ -1,4 +1,42 @@
-# sunset
+# Suns
+
+#### App demo: https://sunsents-sunrises.herokuapp.com/
+
+
+### Description
+
+Allows you to save and search the best places where you can see beautiful sunrises or sunsets
+
+
+### App functionalities
+
+It uses Google Maps API to save and show location.
+
+### Server Install
+
+```sh
+npm install
+```
+
+### Server Usage
+
+```sh
+npm run dev
+```
+
+### Server .env variables needed
+
+- PORT=5005
+- ORIGIN=http://localhost:3000
+- MONGODB_URI
+- SESS_SECRET
+- CLOUDINARY_NAME
+- CLOUDINARY_KEY
+- CLOUDINARY_SECRET
+- GOOGLE_API_KEY
+
+### Endpoints
+
 1. get /  --------- Presentación de la Web
 2. get /signup  --------- Formulario de registro
 3. post /signup --------- Guarda en la BBDD al usuario
