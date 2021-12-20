@@ -1,6 +1,9 @@
 # Suns
 
 #### App demo: https://sunsents-sunrises.herokuapp.com/
+#### Login
+ - email: hola@hola.com 
+ - password: hola
 
 
 ### Description
